@@ -141,61 +141,7 @@ struct Node {
     friend std::ostream& operator<<(std::ostream &stream, const Node &node);
 };
 
-
-struct PathPair {
-    size_t      id;
-    NodePtr     top_left;
-    NodePtr     bottom_right;
-    NodePtr     parent;
-    bool        is_active=true;
-
-    PathPair(const NodePtr &top_left, const NodePtr &bottom_right)
-        : id(top_left->id), top_left(top_left), bottom_right(bottom_right), parent(top_left->parent) {};
-
-    bool update_nodes_by_merge_if_bounded(const PathPairPtr &other, const Pair<double> eps);
-    bool update_nodes_by_merge_if_bounded_keep_track(const PathPairPtr &other, const Pair<double> eps, std::list<NodePtr>& pruned_list);
-    bool update_nodes_by_merge_if_bounded2(const PathPairPtr &other, const Pair<double> eps);
-
-    bool if_merge_bounded(const PathPairPtr &other, const Pair<double> eps)  const;
-
-
-    struct more_than_full_cost {
- bool operator()(const PathPairPtr &a, const PathPairPtr &b) const;
-    };
-
-    friend std::ostream& operator<<(std::ostream &stream, const PathPair &pp);
-};
-
 enum MergeStrategy {SMALLER_G2, RANDOM, MORE_SLACK, SMALLER_G2_FIRST, REVERSE_LEX};
-
-struct ApexPathPair {
-    size_t      id; // state of the node
-    NodePtr     apex;
-    NodePtr     path_node;
-    NodePtr     parent;
-    bool        is_active=true;
-
-    Heuristic& h;
-
-    ApexPathPair(const NodePtr &apex, const NodePtr &path_node, Heuristic& h)
-        : apex(apex), path_node(path_node) , parent(path_node->parent), h(h), id(apex->id){};
-
-    ApexPathPair(const ApexPathPairPtr parent, const Edge& egde);
-
-
-    bool update_nodes_by_merge_if_bounded(const ApexPathPairPtr &other, const EPS eps, MergeStrategy s=MergeStrategy::SMALLER_G2);
-    bool update_apex_by_merge_if_bounded(const NodePtr &other_apex, const EPS eps);
-
-    // bool if_merge_bounded(const ApexPathPairPtr &other, const EP S eps)  const;
-
-
-    struct more_than_full_cost {
-        bool operator()(const ApexPathPairPtr &a, const ApexPathPairPtr &b) const;
-    };
-
-    friend std::ostream& operator<<(std::ostream &stream, const ApexPathPair &pp);
-};
-
 
 struct RealizationPair {
     size_t      id;

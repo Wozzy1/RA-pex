@@ -54,6 +54,4 @@ std::list<Node> &MapQueue<Node, more_than_full_cost>::get_open(size_t id) {
 
 
 template class MapQueue<RealizationPairPtr, RealizationPair::more_than_full_cost>;
-template class MapQueue<ApexPathPairPtr, ApexPathPair::more_than_full_cost>;
-template class MapQueue<PathPairPtr, PathPair::more_than_full_cost>;
 template class MapQueue<NodePtr, Node::more_than_full_cost>;

@@ -25,6 +25,4 @@ public:
 };
 
 using RPQueue = MapQueue<RealizationPairPtr, RealizationPair::more_than_full_cost>;
-using APQueue = MapQueue<ApexPathPairPtr, ApexPathPair::more_than_full_cost>;
-using PPQueue = MapQueue<PathPairPtr, PathPair::more_than_full_cost>;
 using NodeQueue = MapQueue<NodePtr, Node::more_than_full_cost>;

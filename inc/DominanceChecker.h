@@ -2,6 +2,18 @@
 
 #include "Utils/Definitions.h"
 
+// class DominanceChecker {
+// protected:
+//     EPS eps;
+// public:
+//     virtual ~DominanceChecker(){};
+//     DominanceChecker(EPS eps):eps(eps){};
+
+//     virtual bool is_dominated(ApexPathPairPtr node) = 0;
+
+//     virtual void add_node(ApexPathPairPtr ap) = 0;
+// };
+
 class RulebookDominanceChecker {
 protected:
     EPS eps;

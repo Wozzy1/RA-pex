@@ -8,11 +8,6 @@
 #include "Utils/Definitions.h"
 #include "Utils/IOUtils.h"
 #include "Utils/Logger.h"
-#include "BOAStar.h"
-#include "PPA.h"
-#include "SingleCriteria.h"
-#include "ApexSearch.h"
-#include "NAMOA.h"
 
 #include <boost/program_options.hpp>
 #include<boost/tokenizer.hpp>
@@ -51,19 +46,7 @@ SolutionSet single_run_map(size_t graph_size, AdjacencyMatrix& graph, AdjacencyM
     auto runtime = std::clock();
 
     std::unique_ptr<AbstractSolver> solver;
-    if (algorithm == "PPA"){
-        Pair<double> eps_pair({epsV[0], epsV[1]});
-        solver = std::make_unique<PPA>(graph, eps_pair, logger);
-    }else if (algorithm == "BOA"){
-        Pair<double> eps_pair({epsV[0], epsV[1]});
-        solver = std::make_unique<BOAStar>(graph, eps_pair, logger);
-    }else if (algorithm == "NAMOAdr"){
-        solver = std::make_unique<NAMOAdr>(graph, epsV, logger);
-        // ((ApexSearch*)solver.get())->set_merge_strategy(ms);
-    }else if (algorithm == "Apex"){
-        solver = std::make_unique<ApexSearch>(graph, epsV, logger);
-        ((ApexSearch*)solver.get())->set_merge_strategy(ms);
-    }else if (algorithm == "RApex") {
+    if (algorithm == "RApex") {
         solver = std::make_unique<RApexSearch>(graph, epsV, logger);
         ((RApexSearch*)solver.get())->set_noDr(false);
         ((RApexSearch*)solver.get())->set_merge_strategy(ms);
